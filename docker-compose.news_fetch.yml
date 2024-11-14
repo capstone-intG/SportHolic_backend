@@ -1,0 +1,22 @@
+version: "3.8"
+name: my_app
+
+services:
+  news_fetch: 
+    build: 
+      context: .
+      dockerfile: Dockerfile.news_fetch
+    volumes:
+      - ./:/app
+    environment:
+      MYSQL_HOST: db 
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypass
+      MYSQL_DATABASE: testdb
+      MYSQL_PORT: 3306
+      FLASK_APP: main.py
+    networks:
+      - app_network
+networks:
+  app_network:
+    external: true
