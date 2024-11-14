@@ -1,4 +1,7 @@
 #!/bin/sh
+
+flask db init 
+
 echo "[*] flask migration started"
 flask db stamp head 
 flask db migrate
