@@ -1,0 +1,7 @@
+*.pyc 
+*.pyo 
+__pycache__/
+migrations/
+access.log
+AI/model.pt
+AI/stats_model.pkl
