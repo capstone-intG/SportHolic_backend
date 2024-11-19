@@ -988,16 +988,16 @@ class Crawler_News:
                 try: 
                     predictions = News_Predictor().predict(headlines)
                     os.system("echo '[*] news crawler classified {}'".format(len(predictions)))
+                
+                    for prediction, post in zip(predictions, post_cat_none): 
+                        sentence, label = prediction[0], prediction[1] 
+                        post.category = label
+                        #print(f"[*] {label} : {sentence}")
+                        #print(f"[*] {post.headline}")
+                        #print("-"*50)
+                    db.session.commit()
                 except: 
                     os.system("echo [*] news crawler exited")
-                
-                for prediction, post in zip(predictions, post_cat_none): 
-                    sentence, label = prediction[0], prediction[1] 
-                    post.category = label
-                    #print(f"[*] {label} : {sentence}")
-                    #print(f"[*] {post.headline}")
-                    #print("-"*50)
-                db.session.commit()
             else:
                 os.system("echo '[*] news crawler not found anything to classify'")
             
