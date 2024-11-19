@@ -826,8 +826,10 @@ class Crawler_News:
                 pag_a_tag = pag.find_element(By.XPATH, f'//a[@data-id="{to_visit}"]')            
             except NoSuchElementException:
                 break 
-
-            pag_a_tag.click() 
+            try:
+                pag_a_tag.click() 
+            except:
+                break
             
             pages = self.get_anchor_tags_of_page(driver, date)
             articles_link.extend(pages)
