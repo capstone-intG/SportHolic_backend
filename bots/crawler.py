@@ -983,10 +983,12 @@ class Crawler_News:
             
             if len(headlines) > 0:
                 os.system("echo '[*] news crawler classifying started'")
-                predictions = News_Predictor().predict(headlines)
+                try: 
+                    predictions = News_Predictor().predict(headlines)
+                    os.system("echo '[*] news crawler classified {}'".format(len(predictions)))
+                except: 
+                    os.system("echo [*] news crawler exited")
                 
-                os.system("echo '[*] news crawler classified {}'".format(len(predictions)))
-
                 for prediction, post in zip(predictions, post_cat_none): 
                     sentence, label = prediction[0], prediction[1] 
                     post.category = label
