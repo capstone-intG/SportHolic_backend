@@ -41,13 +41,10 @@ def planned_events(match_date):
     
     matches = Calendar.query.filter_by(is_past_game=False, team_id=team.id).order_by(Calendar.match_date).all()
 
-    if len(matches) == 0:
-        return jsonify({'msg': 'no planned matches found'})
-    else:
-        res = {}
-        for i, match in enumerate(matches):
-            res[i] = match.to_dict_planned()
-        return jsonify(res)
+    res = {}
+    for i, match in enumerate(matches):
+        res[i] = match.to_dict_planned()
+    return jsonify(res)
 
 @calendar_route.route("/api/calendar/past_events", defaults={"match_date": None}, methods=['GET'])
 @calendar_route.route("/api/calendar/past_events/<match_date>", methods=['GET'])
@@ -82,11 +79,7 @@ def past_events(match_date):
         return jsonify([match.to_dict_past() for match in matches])
 
     matches = Calendar.query.filter_by(team_id=team.id, is_past_game=True).order_by(Calendar.match_date).all()
-
-    if len(matches) == 0:
-        return jsonify({"msg": "no past matches found"})
-    else:
-        res = {}
-        for i, match in enumerate(matches):
-            res[i] = match.to_dict_past()
-        return jsonify(res)
+    res = {}
+    for i, match in enumerate(matches):
+        res[i] = match.to_dict_past()
+    return jsonify(res)
