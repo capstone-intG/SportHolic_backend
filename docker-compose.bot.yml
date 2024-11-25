@@ -2,7 +2,7 @@ version: "3.8"
 name: my_app
 
 services:
-  bot: 
+  bot:
     build: 
       context: .
       dockerfile: Dockerfile.bot
@@ -17,6 +17,7 @@ services:
       FLASK_APP: main.py
     networks:
       - app_network
+
 networks:
   app_network:
     external: true
