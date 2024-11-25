@@ -1,3 +1,5 @@
+from extensions import db 
+
 class Board(db.Model):
     __tablename__ = 'board'
     __table_args__ = {
@@ -9,4 +11,6 @@ class Board(db.Model):
     contents = db.Column(db.Text, nullable=True)
     team = db.Column(db.String(20), nullable=True)
     written_date = db.Column(db.DateTime, nullable=True)
-    team = db.Column(db.String(20), nullable=True)
+
+    def to_dict(self):
+        return {column.name: getattr(self, column.name) for column in self.__table__.columns if column.name != "team"}

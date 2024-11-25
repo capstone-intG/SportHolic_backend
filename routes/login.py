@@ -30,10 +30,12 @@ def token():
         return jsonify({"msg": "provide username"})
     if team is None:
         return jsonify({"msg": "provide team"})
+    
+    client_ip = request.environ['HTTP_X_FORWARDED_FOR']
 
     user = User.query.filter_by(username=username).first() 
     if user is None:
-        user = User(username=username,team=team)
+        user = User(username=username,team=team, ip_addr=client_ip)
         db.session.add(user) 
         db.session.commit()
 

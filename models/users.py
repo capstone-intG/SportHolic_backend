@@ -5,6 +5,7 @@ class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String(20), nullable=False)
+    ip_addr = db.Column(db.String(20), nullable=False)
     #hashed_password = db.Column(db.String(512), nullable=True)
     team = db.Column(db.String(20), nullable=False)
     

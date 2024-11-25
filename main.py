@@ -18,6 +18,7 @@ from routes.calendar import calendar_route
 from routes.stats import stats_route
 from routes.predict import prediction_route
 from routes.bots_routes import crawling_routes
+from routes.board import board_routes
 
 app.register_blueprint(login_route)
 app.register_blueprint(news_route)
@@ -25,6 +26,7 @@ app.register_blueprint(calendar_route)
 app.register_blueprint(stats_route)
 app.register_blueprint(prediction_route)
 app.register_blueprint(crawling_routes)
+app.register_blueprint(board_routes)
 
 app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1)
 

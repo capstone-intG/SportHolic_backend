@@ -8,7 +8,7 @@ from sqlalchemy import func, extract
 calendar_route = Blueprint('calendar_route', __name__)
 
 @calendar_route.route("/dev/calendar/planned_events", methods=['GET'])
-def planned_events():
+def planned_events_dev():
     team_name = request.args.get("team_name") 
     match_date = request.args.get("match_date")
 
@@ -42,7 +42,7 @@ def planned_events():
     return jsonify(res)
 
 @calendar_route.route("/dev/calendar/past_events", methods=['GET'])
-def past_events():
+def past_events_dev():
     team_name = request.args.get("team_name")
     match_date = request.args.get("match_date")
 
