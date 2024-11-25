@@ -1,6 +1,6 @@
 #!/bin/sh
 
-rm -rf migrations
+echo "[*] hi" 
 
 flask db init
 

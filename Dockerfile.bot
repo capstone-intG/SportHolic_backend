@@ -13,8 +13,6 @@ rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-COPY . .
-
 COPY requirements.txt .
 
 RUN pip3 install --no-cache-dir -r requirements.txt
@@ -22,6 +20,7 @@ RUN pip3 install mxnet-mkl==1.6.0 numpy==1.23.1
 RUN pip3 install cryptography
 RUN pip3 install gunicorn 
 
+#COPY entrypoint_bot.sh /app/entrypoint_bot.sh 
 COPY entrypoint_bot.sh /entrypoint_bot.sh
 RUN chmod +x /entrypoint_bot.sh
-ENTRYPOINT ["/entrypoint_bot.sh"]
+CMD ["/entrypoint_bot.sh"]
