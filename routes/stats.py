@@ -8,7 +8,7 @@ stats_route = Blueprint('stats_route', __name__)
 
 @stats_route.route("/dev/api/stats", methods=['GET'])
 def dev_stat():
-    team_name = request.args.get("round_num")
+    team_name = request.args.get("team_name")
 
     team = Team.query.filter_by(team_name=team_name).first()
     if team is None:
