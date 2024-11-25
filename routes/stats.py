@@ -6,6 +6,19 @@ from models.users import User
 
 stats_route = Blueprint('stats_route', __name__)
 
+@stats_route.route("/dev/api/stats", methods=['GET'])
+def dev_stat():
+    team_name = request.args.get("round_num")
+
+    team = Team.query.filter_by(team_name=team_name).first()
+    if team is None:
+        return jsonify({'msg': f'Team({team_name}) not found'})
+    
+    stats = team.stats
+    res = [stat.to_dict() for stat in stats]
+    return jsonify(res)
+
+
 @stats_route.route("/api/stats", methods=['GET'])
 @jwt_required()
 def all_stats():
